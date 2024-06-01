@@ -1,3 +1,7 @@
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Client {
     private String nom;
     private String prenom;
@@ -74,4 +78,26 @@ public class Client {
     public void setPlaquesImmatriculation(String plaquesImmatriculation) {
         this.plaquesImmatriculation = plaquesImmatriculation;
     }
+
+    public List<Borne> verifierDisponibilite(Date date, Date debut, Date fin) {
+        List<Borne> bornesDisponibles = new ArrayList<>();
+        List<Borne> bornes = getAllBornes();  // Méthode fictive pour obtenir toutes les bornes
+        for (Borne borne : bornes) {
+            if (borne.verifierDisponibilite(date, debut, fin)) {
+                bornesDisponibles.add(borne);
+            }
+        }
+        return bornesDisponibles;
+    }
+
+    private List<Borne> getAllBornes() {
+        // Cette méthode doit retourner la liste de toutes les bornes du système
+        // Exemple simplifié avec des données fictives
+        List<Borne> bornes = new ArrayList<>();
+        bornes.add(new Borne("Borne1", new StatutBorne(1, "Disponible")));
+        bornes.add(new Borne("Borne2", new StatutBorne(2, "Occupée")));
+        bornes.add(new Borne("Borne3", new StatutBorne(1, "Disponible")));
+        return bornes;
+    }
+
 }

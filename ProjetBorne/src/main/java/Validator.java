@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class Validator {
@@ -19,12 +20,12 @@ public class Validator {
     }
 
     public static boolean isValidCreditCard(String card) {
-        String cardRegex = "^(?:4[0-9]{12}(?:[0-9]{3})?" +        // Visa
-                "|5[1-5][0-9]{14}" +                    // MasterCard
-                "|3[47][0-9]{13}" +                     // American Express
-                "|3(?:0[0-5]|[68][0-9])[0-9]{11}" +     // Diners Club
-                "|6(?:011|5[0-9]{2})[0-9]{12}" +        // Discover
-                "|(?:2131|1800|35\\d{3})\\d{11})$";     // JCB
+        String cardRegex = "^(?:4[0-9]{12}(?:[0-9]{3})?" + // Visa
+            "|5[1-5][0-9]{14}" + // MasterCard
+            "|3[47][0-9]{13}" + // American Express
+            "|3(?:0[0-5]|[68][0-9])[0-9]{11}" + // Diners Club
+            "|6(?:011|5[0-9]{2})[0-9]{12}" + // Discover
+            "|(?:2131|1800|35\\d{3})\\d{11})$"; // JCB
         Pattern pat = Pattern.compile(cardRegex);
         return card != null && pat.matcher(card).matches();
     }
@@ -39,5 +40,6 @@ public class Validator {
         String numberRegex = "^\\d{10}$"; // Format : 10 chiffres
         Pattern pat = Pattern.compile(numberRegex);
         return number != null && pat.matcher(number).matches();
-    }
+    
+
 }
