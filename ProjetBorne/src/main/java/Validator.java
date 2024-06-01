@@ -40,6 +40,5 @@ public class Validator {
         String numberRegex = "^\\d{10}$"; // Format : 10 chiffres
         Pattern pat = Pattern.compile(numberRegex);
         return number != null && pat.matcher(number).matches();
-    
-
+    }
 }
