@@ -1,8 +1,7 @@
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
+package model;
 
 public class Client {
+    private int id;
     private String nom;
     private String prenom;
     private String adresse;
@@ -11,7 +10,8 @@ public class Client {
     private String numeroCarteDebit;
     private String plaquesImmatriculation;
 
-    // Constructor
+    // Constructeurs, getters et setters
+
     public Client(String nom, String prenom, String adresse, String numeroMobile, String adresseEmail, String numeroCarteDebit, String plaquesImmatriculation) {
         this.nom = nom;
         this.prenom = prenom;
@@ -22,7 +22,27 @@ public class Client {
         this.plaquesImmatriculation = plaquesImmatriculation;
     }
 
-    // Getters and Setters
+    public Client(int id, String nom, String prenom, String adresse, String numeroMobile, String adresseEmail, String numeroCarteDebit, String plaquesImmatriculation) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.adresse = adresse;
+        this.numeroMobile = numeroMobile;
+        this.adresseEmail = adresseEmail;
+        this.numeroCarteDebit = numeroCarteDebit;
+        this.plaquesImmatriculation = plaquesImmatriculation;
+    }
+
+    // Getters et Setters
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getNom() {
         return nom;
     }
@@ -78,26 +98,4 @@ public class Client {
     public void setPlaquesImmatriculation(String plaquesImmatriculation) {
         this.plaquesImmatriculation = plaquesImmatriculation;
     }
-
-    public List<Borne> verifierDisponibilite(Date date, Date debut, Date fin) {
-        List<Borne> bornesDisponibles = new ArrayList<>();
-        List<Borne> bornes = getAllBornes();  // Méthode fictive pour obtenir toutes les bornes
-        for (Borne borne : bornes) {
-            if (borne.verifierDisponibilite(date, debut, fin)) {
-                bornesDisponibles.add(borne);
-            }
-        }
-        return bornesDisponibles;
-    }
-
-    private List<Borne> getAllBornes() {
-        // Cette méthode doit retourner la liste de toutes les bornes du système
-        // Exemple simplifié avec des données fictives
-        List<Borne> bornes = new ArrayList<>();
-        bornes.add(new Borne("Borne1", new StatutBorne(1, "Disponible")));
-        bornes.add(new Borne("Borne2", new StatutBorne(2, "Occupée")));
-        bornes.add(new Borne("Borne3", new StatutBorne(1, "Disponible")));
-        return bornes;
-    }
-
 }

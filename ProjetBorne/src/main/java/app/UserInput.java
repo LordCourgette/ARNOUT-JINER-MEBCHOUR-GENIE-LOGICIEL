@@ -1,3 +1,5 @@
+package app;
+
 import java.util.Scanner;
 
 public class UserInput {
@@ -35,6 +37,10 @@ public class UserInput {
             }
         }
         return input;
+    }
+
+    public int getValidInt(int min, int max) {
+        return scanner.nextInt();
     }
 
     @FunctionalInterface

@@ -1,38 +1,56 @@
+package app;
+
 import java.util.Scanner;
 
-public class Application {
+import model.Client;
+import service.ClientService;
 
+public class CommandHandler {
+    private ClientService clientService;
     private UserInput userInput;
     private Scanner scanner;
+    private Application app;
 
-    public Application() {
-        this.scanner = new Scanner(System.in);
-        this.userInput = new UserInput(scanner);
-        connexion();
-    }
-
-    public void connexion() {
-        System.out.println("\nBonjour, choisir ce que vous voulez faire.");
-        System.out.println("1) Tapez 1 pour réserver");
-        System.out.println("2) Tapez 2 pour vous inscrire");
-        String input = scanner.next();
-        if (input.equals("1")) {
-            identification();
-        } else if (input.equals("2")) {
-            inscription();
-        } else {
-            System.out.println("Vous n'avez pas choisi une option valide, veuillez réessayer");
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            connexion();
+    public CommandHandler(Application app) {
+        try {
+            this.clientService = new ClientService();
+            this.scanner = new Scanner(System.in);
+            this.userInput = new UserInput(this.scanner);
+            this.app = app;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    public void identification() {
-        // Logique pour l'identification
+    public void handleCommand(int command, String menu) {
+        switch (menu) {
+            case "MAIN":
+                handleMainCommand(command);
+                break;
+            case "ACTION":
+                handleActionCommand(command);
+                break;
+            default:
+                System.out.println("Menu inconnu");
+        }
+    }
+
+    private void handleActionCommand(int command) {
+        
+    }
+
+    private void handleMainCommand(int command) {
+        switch(command) {
+            case 0:
+                break;
+            case 1:
+                inscription();
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+        }
     }
 
     public void inscription() {
@@ -50,14 +68,11 @@ public class Application {
         Client client = new Client(nom, prenom, adresse, numeroMobile, mail, carte, plaque);
 
         // Insertion du client dans la base de données
-        DatabaseManager.insertClient(client);
-
-        System.out.println("Inscription réussie !");
-
-        connexion();
-    }
-
-    public static void main(String[] args) {
-        new Application();
+        try {
+            clientService.addClient(client);
+            System.out.println("Inscription réussie !");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
