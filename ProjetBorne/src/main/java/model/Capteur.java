@@ -1,3 +1,5 @@
+package model;
+
 public class Capteur {
     private String identifiant;
 

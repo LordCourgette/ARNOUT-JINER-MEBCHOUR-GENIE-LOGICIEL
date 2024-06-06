@@ -1,3 +1,5 @@
+package model;
+
 public class StatutBorne {
     private int id;
     private String nom;
