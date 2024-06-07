@@ -182,8 +182,9 @@ CREATE PROCEDURE PGetBorne(
     IN p_timeFin TIME
 )
 BEGIN
-    SELECT b.identifiant
+    SELECT b.identifiant, sb.id, sb.nom
     FROM borne.Borne b
+    LEFT JOIN StatutBorne sb ON b.statutBorneId = sb.id
     LEFT JOIN Reservation r ON b.identifiant = r.borneIdentifiant 
         AND r.date = p_date
         AND (
