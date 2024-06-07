@@ -40,7 +40,20 @@ public class UserInput {
     }
 
     public int getValidInt(int min, int max) {
-        return scanner.nextInt();
+        int input;
+        while (true) {
+            try {
+                input = Integer.parseInt(scanner.nextLine());
+                if (input >= min && input <= max) {
+                    break;
+                } else {
+                    System.out.println("Veuillez choisir un nombre valide entre " + min + " et " + max);
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Nombre invalide, veuillez réessayer");
+            }
+        }
+        return input;
     }
 
     @FunctionalInterface
