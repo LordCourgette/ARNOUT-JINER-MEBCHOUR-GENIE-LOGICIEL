@@ -173,3 +173,25 @@ BEGIN
 END$$
 
 DELIMITER ;
+
+DELIMITER $$
+
+CREATE PROCEDURE PGetBorne(
+    IN p_date DATE,
+    IN p_timeDebut TIME,
+    IN p_timeFin TIME
+)
+BEGIN
+    SELECT b.identifiant
+    FROM borne.Borne b
+    LEFT JOIN Reservation r ON b.identifiant = r.borneIdentifiant 
+        AND r.date = p_date
+        AND (
+            (r.timeDebut <= p_timeDebut AND r.timeFin > p_timeDebut) OR
+            (r.timeDebut < p_timeFin AND r.timeFin >= p_timeFin) OR
+            (r.timeDebut >= p_timeDebut AND r.timeFin <= p_timeFin)
+        )
+    WHERE r.borneIdentifiant IS NULL;
+END $$
+
+DELIMITER ;
